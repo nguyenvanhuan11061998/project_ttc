@@ -12,15 +12,19 @@ public class Main {
         arrBill.add(new Bill(003,"Nguyen Van Huan2",4000000,"1996-11-24"));
         arrBill.add(new Bill(004,"Nguyen Van Huan3",2000000,"1996-12-24"));
 
-//        Collections.sort(arrBill);
-//        for (Bill b: arrBill) {
-//            System.out.println(b.getId() +" "+b.getName() +" "+b.getMoney()+" "+b.getDate());
-//        }
+
+        // 3: sắp xếp theo thứ tự tăng dần money
+        Collections.sort(arrBill);
+        for (Bill b: arrBill) {
+            System.out.println(b.getId() +" "+b.getName() +" "+b.getMoney()+" "+b.getDate());
+        }
+
+
 
         ListBill listBill = new ListBill();
-//        listBill.ngayLapHD(arrBill);
-//        listBill.listBillMoney(arrBill);
-//        listBill.hashMapBin(arrBill);
-        listBill.listBill7(arrBill);
+//        listBill.ngayLapHD(arrBill);              //distinct ngày lập hóa đơn
+//        listBill.listBillMoney(arrBill);          // list Bill có money > 1000000
+//        listBill.hashMapBin(arrBill);             //hashMap Bill
+//        listBill.listBill7(arrBill);              //Cau 7
     }
 }

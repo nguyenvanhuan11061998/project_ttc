@@ -3,14 +3,6 @@ package com.ttc.Bai3;
 import java.util.*;
 
 public class ListBill {
-    public void ngayLapHD(List<Bill> listBill){
-
-        List<String> listDay = new ArrayList<>();
-        for (Bill bill: listBill) {
-            listDay.add(bill.getDate());
-        }
-        listDay.forEach(e -> System.out.println(e));
-    }
 
     public void listBillMoney(List<Bill> listBill){
 
@@ -23,19 +15,32 @@ public class ListBill {
         listBillMoney.forEach(b -> System.out.println(b.getId() +" "+b.getName() +" "+b.getMoney()+" "+b.getDate()));
     }
 
-    private boolean dayExit(String day, HashMap<String, List<Bill>> hashMap){
-        for (String key: hashMap.keySet()) {
-            if (key.equals(day)){
+    private boolean chekDay(List<String> list, String day){
+        for (String d: list) {
+            if (d.equals(day)){
                 return true;
             }
         }
         return false;
     }
 
+    public void ngayLapHD(List<Bill> listBill) {
+
+        List<String> listDay = new ArrayList<>();
+        for (Bill bill : listBill) {
+            if (chekDay(listDay, bill.getDate())) {
+
+            } else {
+                listDay.add(bill.getDate());
+            }
+        }
+        listDay.forEach(e -> System.out.println(e));
+    }
+
     public HashMap<String, List<Bill>> hashMapBin(List<Bill> listBill){
         HashMap<String, List<Bill>> hashMap = new HashMap<>();
         for (Bill b :listBill) {
-            if (dayExit(b.getDate(),hashMap)){
+            if (hashMap.containsKey(b.getDate())){
 
             }else {
                 List<Bill> list = new ArrayList<>();
