@@ -1,5 +1,10 @@
 package com.ttc.Bai3;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
+
 public class Bill implements Comparable<Bill>{
     private int id;
     private String name;
@@ -15,13 +20,37 @@ public class Bill implements Comparable<Bill>{
 
     @Override
     public int compareTo(Bill bill) {
-        if (money == bill.getMoney()){
+//        if (money == bill.getMoney()){
+//            return 0;
+//        }else if (money > bill.getMoney()){
+//            return 1;
+//        }else {
+//            return -1;
+//        }
+
+        if (formatTime(date) == formatTime(bill.getDate())){
             return 0;
-        }else if (money > bill.getMoney()){
+        }else if (formatTime(date).after(formatTime(bill.getDate()))){
             return 1;
         }else {
             return -1;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Bill bill = (Bill) o;
+        return id == bill.id &&
+                Objects.equals(name, bill.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
     public int getId() {
@@ -39,4 +68,16 @@ public class Bill implements Comparable<Bill>{
     public String getDate() {
         return date;
     }
+
+    private Date formatTime(String time){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = format.parse(time);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

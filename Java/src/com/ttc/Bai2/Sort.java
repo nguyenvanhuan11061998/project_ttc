@@ -1,8 +1,10 @@
 package com.ttc.Bai2;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.ttc.Bai3.Bill;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Sort {
     public List<Integer> sortList(List<Integer> listSo){
@@ -10,4 +12,8 @@ public class Sort {
         Collections.sort(sortList);
         return sortList;
     }
+
+
+
+
 }
