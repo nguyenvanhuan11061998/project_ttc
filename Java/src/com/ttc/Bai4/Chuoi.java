@@ -110,40 +110,31 @@ public class Chuoi {
         System.out.println(hashMap.get(maxCount+""));
     }
 
-//    private int countChuoi(String chuoi, String chuoiCon){
-//        int count = 0;
-//        while (chuoi.contains(chuoiCon)){
-//            count ++;
-//            int index  =chuoi.indexOf(chuoiCon)+chuoiCon.length();
-//            chuoi = chuoi.substring(index);
-//        }
-//        return count;
-//    }
-//
-//    private void spiltChuoi(HashMap<String, String> hashMap, int n, String chuoi){
-//        for (int i = 0; i < chuoi.length()-n; i++){
-//            String chuoi1 = chuoi.substring(i,i+n);
-//            if (hashMap.containsKey(chuoi1)){
-//
-//            }else {
-//                hashMap.put(chuoi1,countChuoi(chuoi,chuoi1)+"");
-//            }
-//        }
-//    }
-//
-//    public void chuoi2_2(String chuoi){
-//        HashMap<String, String> hashMap = new HashMap<>();
-//
-//
-//        for (int i = 0; i < chuoi.length(); i++) {
-//            spiltChuoi(hashMap,i,chuoi);
-//        }
-//
-//
-//        Set<Map.Entry<String, String>> setChuoi = hashMap.entrySet();
-//        System.out.println(setChuoi);
-//    }
+    private void splitChuoi(int n, HashMap<String, Integer> hashMap, String chuoi){
+        for (int i = 0; i < chuoi.length()-n; i++) {
+            String chuoi1 = chuoi.substring(i,i+n+1);
+            if (hashMap.containsKey(chuoi1)){
+                int count = hashMap.get(chuoi1);
+                count++;
+                hashMap.replace(chuoi1,count);
+            }else {
+                hashMap.put(chuoi1,1);
+            }
+        }
+    }
 
+    public void chuoi2_2(String chuoi){
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < chuoi.length(); i++) {
+            splitChuoi(i,hashMap,chuoi);
+        }
+
+        for (String key : hashMap.keySet()) {
+            System.out.println("Key = " + key+ " - Values = "+hashMap.get(key));
+        }
+
+        System.out.println(hashMap.size());
+    }
 
     public void chuoi3(List<String> listChuoi){
         String chuoi = "";
