@@ -70,8 +70,4 @@ public class ListBill {
         return setBill;
     }
 
-
-
-
-
 }

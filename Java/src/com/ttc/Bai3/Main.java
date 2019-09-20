@@ -23,11 +23,10 @@ public class Main {
 
 
         ListBill listBill = new ListBill();
-//        listBill.ngayLapHD(arrBill);              //distinct ngày lập hóa đơn
-//        listBill.listBillMoney(arrBill);          // list Bill có money > 1000000
-//        listBill.hashMapBin(arrBill);             //hashMap Bill
-//        listBill.listBill7(arrBill);              //Cau 7
-//        listBill.setBill(arrBill);
-//        listBill.sortBill(arrBill);
+        listBill.ngayLapHD(arrBill);              //distinct ngày lập hóa đơn
+        listBill.listBillMoney(arrBill);          // list Bill có money > 1000000
+        listBill.hashMapBin(arrBill);             //hashMap Bill
+        listBill.listBill7(arrBill);              //Cau 7
+        listBill.setBill(arrBill);
     }
 }
