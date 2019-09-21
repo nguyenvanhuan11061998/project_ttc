@@ -26,20 +26,20 @@ public class DateFormat {
 
     public void dateFormat2(String time){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM");
         try {
             Date date = format.parse(time);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
 
-            String ngayDau  = format1.format(date)+"-"+calendar.getMinimum(Calendar.DATE);
-            String ngayCuoi = format1.format(date)+"-"+calendar.getMaximum(Calendar.DATE);
+            calendar.add(Calendar.DATE,-(calendar.get(Calendar.DATE) - 1));
+            String ngayDauThang = format.format(calendar.getTime());
 
-            int ngayDTuan = calendar.get(Calendar.DAY_OF_WEEK);
-            int soNgay =0;
-            if (ngayDTuan != 2){
-                soNgay = ngayDTuan - 2;
-                calendar.add(Calendar.DAY_OF_MONTH, -soNgay);
+            calendar.add(Calendar.DATE,calendar.getMaximum(Calendar.DATE)-calendar.get(Calendar.DATE));
+            String ngayCuoiThang = format.format(calendar.getTime());
+
+            calendar.setTime(date);
+            if (calendar.get(Calendar.DAY_OF_WEEK) != 2){
+                calendar.add(Calendar.DATE, -(calendar.get(Calendar.DAY_OF_WEEK) - 2));
             }
             String ngayDauTuan = format.format(calendar.getTime());
 
@@ -48,8 +48,8 @@ public class DateFormat {
             String ngay100 = format.format(calendar.getTime());
 
 
-            System.out.println("ngay dau tuan: "+ngayDau);
-            System.out.println("ngay cuoi tuan: "+ngayCuoi);
+            System.out.println("Ngay dau thang: "+ngayDauThang);
+            System.out.println("ngay cuoi thang: "+ngayCuoiThang);
             System.out.println("ngay dau tuan: "+ngayDauTuan);
             System.out.println("100 ngay sau: "+ngay100);
 
@@ -121,6 +121,8 @@ public class DateFormat {
 
     public void formatDate6(String time1, String time2){
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        SimpleDateFormat format1 = new SimpleDateFormat("ss");
+        SimpleDateFormat format2 = new SimpleDateFormat("mm:ss");
         try {
             Date date1 = format.parse(time1);
             Date date2 = format.parse(time2);
@@ -128,16 +130,18 @@ public class DateFormat {
             Timestamp timestamp1 = new Timestamp(date1.getTime());
             Timestamp timestamp2 = new Timestamp(date2.getTime());
 
-            long time = timestamp1.getTime() - timestamp2.getTime();
-            long days = TimeUnit.MILLISECONDS.toDays(time);
-            long hours = TimeUnit.MILLISECONDS.toHours(time);
-            long minutes = TimeUnit.MILLISECONDS.toMinutes(time);
+            long time = (timestamp1.getTime() - timestamp2.getTime())/1000;
+            System.out.println("giay: "+time);
 
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.SECOND,(int)time%60);
+            String time3 = format1.format(calendar.getTime());
+            System.out.println("phut - giay: "+time/60+":"+time3);
 
-
-            System.out.println("Cach nhau : "+days+" ngay");
-            System.out.println("Cach nhau : "+hours+" gio");
-            System.out.println("Cach nhau : "+minutes+" phut");
+            calendar =  Calendar.getInstance();
+            calendar.set(Calendar.MINUTE,(int)time%3600);
+            String time4 = format2.format(calendar.getTime());
+            System.out.println("Gio - phut - giay: "+time/3600+":"+time4);
 
         } catch (ParseException e) {
             e.printStackTrace();

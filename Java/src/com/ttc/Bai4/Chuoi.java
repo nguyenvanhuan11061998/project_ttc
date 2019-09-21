@@ -79,37 +79,35 @@ public class Chuoi {
 
 
 //cau2:
-    private int countPtu(String chuoi, char ptu){
-        int count =0;
-        for (int i = 0; i < chuoi.length(); i++) {
-            if(chuoi.charAt(i) == ptu){
-                count++;
-            }
-        }
-        return count;
-    }
-
-
-    //tim ki tu xuat hien nhieu nhat
+    //a. tim ki tu xuat hien nhieu nhat
     public void chuoi2(String chuoi){
         int maxCount= 0;
-        HashMap<String, Character> hashMap = new HashMap<>();
+        HashMap<Character, Integer> hashMap = new HashMap<>();
         for (int i = 0; i < chuoi.length(); i++) {
-            if(hashMap.containsKey(chuoi.charAt(i))){
-
-            }{
-                hashMap.put(countPtu(chuoi,chuoi.charAt(i))+"",chuoi.charAt(i));
-                if(maxCount <= countPtu(chuoi,chuoi.charAt(i))) {
-                    maxCount = countPtu(chuoi,chuoi.charAt(i));
+            if (hashMap.containsKey(chuoi.charAt(i))){
+                int count = hashMap.get(chuoi.charAt(i));
+                count++;
+                if (maxCount <= count){
+                    maxCount = count;
+                }
+                hashMap.replace(chuoi.charAt(i),count);
+            }else {
+                hashMap.put(chuoi.charAt(i),1);
+                if (maxCount == 0){
+                    maxCount = 1;
                 }
             }
         }
 
-        System.out.println(maxCount);
-
-        System.out.println(hashMap.get(maxCount+""));
+        for (Character ptu: hashMap.keySet()) {
+            if (hashMap.get(ptu)==maxCount){
+                System.out.println(ptu + " - "+ maxCount);
+            }
+        }
     }
 
+
+ // b
     private void splitChuoi(int n, HashMap<String, Integer> hashMap, String chuoi){
         for (int i = 0; i < chuoi.length()-n; i++) {
             String chuoi1 = chuoi.substring(i,i+n+1);
@@ -147,7 +145,6 @@ public class Chuoi {
     public void chuoi4(String chuoi){
         String[] arrChuoi = chuoi.split("\\,");
         List<String> listChuoi = new ArrayList<>(Arrays.asList(arrChuoi));
-
 
         for (int i = 0; i < listChuoi.size(); i++) {
             System.out.print(" "+listChuoi.get(i));
